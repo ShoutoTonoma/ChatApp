@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.fragments.LoginFragment">
+
+    <TextView
+        android:id="@+id/tvWelcome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/login_welcome_text"
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/large_text"
+        app:layout_constraintBottom_toTopOf="@+id/emailInput"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.4"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+
+    <EditText
+        android:id="@+id/emailInput"
+        style="@style/editText"
+        android:hint="@string/login_email_hint"
+        android:inputType="textEmailAddress"
+        app:layout_constraintBottom_toTopOf="@+id/passwordInput"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvWelcome"
+        app:layout_constraintVertical_bias="0.5"
+        android:autofillHints="emailAddress" />
+
+    <EditText
+        android:id="@+id/passwordInput"
+        style="@style/editText"
+        android:hint="@string/login_password_hint"
+        android:inputType="textPassword"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/emailInput"
+        app:layout_constraintVertical_bias="0.5"
+        android:autofillHints="password" />
+
+    <Button
+        android:id="@+id/btnSignIn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/login_sign_in_btn_text"
+        android:layout_marginTop="@dimen/vertical_large_margin"
+        app:layout_constraintTop_toBottomOf="@id/passwordInput"
+        app:layout_constraintStart_toStartOf="@id/passwordInput"
+        app:layout_constraintEnd_toEndOf="@id/passwordInput"/>
+
+    <TextView
+        android:id="@+id/tvHaveAccount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/login_dont_have_account_text"
+        android:textColor="@color/grey"
+        app:layout_constraintStart_toStartOf="@id/btnSignIn"
+        app:layout_constraintTop_toBottomOf="@id/btnSignIn" />
+
+    <TextView
+        android:id="@+id/signUpLink"
+        style="@style/sign_up_link"
+        android:background="@drawable/ripple_effect"
+        android:text="@string/sign_up_link_text"
+        app:layout_constraintBottom_toBottomOf="@id/tvHaveAccount"
+        app:layout_constraintEnd_toEndOf="@+id/btnSignIn"
+        app:layout_constraintHorizontal_bias="0.191"
+        app:layout_constraintStart_toEndOf="@id/tvHaveAccount"
+        app:layout_constraintTop_toTopOf="@id/tvHaveAccount"
+        app:layout_constraintVertical_bias="0.0" />
+</androidx.constraintlayout.widget.ConstraintLayout>

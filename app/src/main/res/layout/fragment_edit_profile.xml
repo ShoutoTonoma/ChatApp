@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.fragments.EditProfileFragment">
+
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/edit_profile_user_photo"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="40dp"
+        android:src="@drawable/default_photo"
+        app:civ_border_color="@color/colorPrimary"
+        app:civ_border_width="3dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/edit_profile_btn"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="120dp"
+        android:src="@drawable/ic_edit_profile"
+        app:civ_border_width="2dp"
+        app:civ_border_color="@color/colorPrimary"
+        app:civ_circle_background_color="@color/grey"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.582"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/epFullnameInput"
+        android:hint="Fullname"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edit_profile_user_photo"
+        style="@style/edit_profile_inputText"
+        android:inputType="text" />
+
+    <EditText
+        android:id="@+id/epPhoneNumberInput"
+        style="@style/edit_profile_inputText"
+        android:hint="Phone Number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/epFullnameInput"
+        android:inputType="phone" />
+
+
+    <EditText
+        android:id="@+id/epRegionInput"
+        style="@style/edit_profile_inputText"
+        android:hint="Region"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/epPhoneNumberInput" />
+
+    <Button
+        android:id="@+id/dataSaveBtn"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/horizontal_margin"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:layout_marginTop="@dimen/vertical_large_margin"
+        android:text="Save"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/epRegionInput"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
