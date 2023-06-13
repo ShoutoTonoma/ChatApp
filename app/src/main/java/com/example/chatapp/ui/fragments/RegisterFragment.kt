@@ -7,6 +7,9 @@ import com.example.chatapp.utilits.AUTH
 import com.example.chatapp.utilits.CHILD_EMAIL
 import com.example.chatapp.utilits.CHILD_FULLNAME
 import com.example.chatapp.utilits.CHILD_ID
+import com.example.chatapp.utilits.CHILD_PHONE
+import com.example.chatapp.utilits.CURRENT_UID
+import com.example.chatapp.utilits.NODE_PHONES
 import com.example.chatapp.utilits.NODE_USERS
 import com.example.chatapp.utilits.REF_DATABASE_ROOT
 import com.example.chatapp.utilits.checkEmptyText
@@ -20,7 +23,8 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(
 
     override fun onStart() {
         super.onStart()
-        (activity as RegisterActivity).mBinding.tvLogin.text = getString(R.string.toolbar_registration)
+        (activity as RegisterActivity).mBinding.tvLogin.text =
+            getString(R.string.toolbar_registration)
         binding.signInLink.setOnClickListener {
             replaceFragment(LoginFragment(), false)
         }
@@ -40,36 +44,45 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(
 
                 checkEmptyText(binding.passwordInput) -> {
                     showToast("Please enter password")
-                } else -> {
+                }
+
+                else -> {
                     val name: String = binding.nameInput.text.toString().trim { it <= ' ' }
                     val email: String = binding.emailInput.text.toString().trim { it <= ' ' }
+                    val phone: String = binding.phoneNumberInput.text.toString().trim { it <= ' ' }
                     val password: String = binding.passwordInput.text.toString().trim { it <= ' ' }
                     val dateMap = mutableMapOf<String, Any>()
 
                     dateMap[CHILD_FULLNAME] = name
                     dateMap[CHILD_EMAIL] = email
+                    dateMap[CHILD_PHONE] = phone
+
 
                     AUTH.createUserWithEmailAndPassword(email, password)
-                        .addOnCompleteListener { task ->
-                            if (task.isSuccessful) {
-                                val uid = AUTH.currentUser?.uid.toString()
-                                dateMap[CHILD_ID] = uid
-                                REF_DATABASE_ROOT.child(NODE_USERS).child(uid)
-                                    .updateChildren(dateMap)
-                                    .addOnCompleteListener { task2 ->
-                                        if (task2.isSuccessful) {
+                        .addOnSuccessListener {
+                            val uid = AUTH.currentUser?.uid.toString()
+                            dateMap[CHILD_ID] = uid
+                            REF_DATABASE_ROOT.child(NODE_USERS).child(uid)
+                                .updateChildren(dateMap)
+//                                val uid = AUTH.currentUser?.uid.toString()
+                            dateMap[CHILD_ID] = uid
+
+                            REF_DATABASE_ROOT.child(NODE_PHONES).child(phone).setValue(uid)
+                                .addOnFailureListener { showToast(it.message.toString()) }
+                                .addOnSuccessListener {
+                                    REF_DATABASE_ROOT.child(NODE_USERS).child(uid)
+                                        .updateChildren(dateMap)
+                                        .addOnSuccessListener {
                                             AUTH.signOut()
                                             replaceFragment(LoginFragment(), false)
                                             showToast("You were registered successfully")
-                                        } else showToast(task2.exception!!.message.toString())
-                                    }
-
-                            } else {
-                                showToast(task.exception!!.message.toString())
-                            }
-                        }
-            }
+                                        }
+                                }
+                                .addOnFailureListener { showToast(it.message.toString()) }
+                        }.addOnFailureListener { showToast(it.message.toString()) }
+                }
             }
         }
     }
 }
+

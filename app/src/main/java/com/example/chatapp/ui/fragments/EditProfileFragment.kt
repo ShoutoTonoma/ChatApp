@@ -74,26 +74,21 @@ class EditProfileFragment : BaseFragment<FragmentEditProfileBinding>(
     }
 
     private fun initFullnameList() {
-        val fullDataList = listOf(USER.fullname, USER.phone, USER.region)
+        val fullDataList = listOf(USER.fullname, USER.region)
         with(binding) {
             epFullnameInput.setText(fullDataList[0])
-            epPhoneNumberInput.setText(fullDataList[1])
-            epRegionInput.setText(fullDataList[2])
+            epRegionInput.setText(fullDataList[1])
         }
     }
 
 
     private fun change() {
         val fullName = binding.epFullnameInput.text.toString()
-        val phone = binding.epPhoneNumberInput.text.toString()
         val region = binding.epRegionInput.text.toString()
 
-        if (fullName.isEmpty() && phone.isEmpty() && region.isEmpty()) {
+        if (fullName.isEmpty() && region.isEmpty()) {
             showToast("Заполните все данные")
         } else {
-            setValueToDb(phone, CHILD_PHONE) {
-                USER.phone = phone
-            }
             setValueToDb(region, CHILD_REGION) {
                 USER.region = region
             }

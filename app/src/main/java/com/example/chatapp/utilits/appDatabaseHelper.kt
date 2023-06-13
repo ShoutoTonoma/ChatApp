@@ -1,6 +1,9 @@
 package com.example.chatapp.utilits
 
 import android.net.Uri
+import android.provider.ContactsContract
+import android.util.Log
+import com.example.chatapp.models.CommonModel
 import com.example.chatapp.models.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
@@ -14,14 +17,18 @@ lateinit var REF_DATABASE_ROOT: DatabaseReference
 lateinit var REF_STORAGE_ROOT: StorageReference
 lateinit var USER: User
 
+const val NODE_USERS = "users"
+const val NODE_PHONES = "phones"
+const val NODE_PHONES_CONTACTS = "phones_contacts"
 const val FOLDER_PROFILE_IMAGE = "profile_image"
 
 const val CHILD_ID = "id"
-const val NODE_USERS = "users"
+
 const val CHILD_EMAIL = "username"
 const val CHILD_FULLNAME = "fullname"
 const val CHILD_PHONE = "phone"
 const val CHILD_REGION = "region"
+const val CHILD_STATUS = "status"
 const val CHILD_BIO = "bio"
 const val CHILD_PHOTO_URL = "photoUrl"
 
@@ -70,4 +77,46 @@ inline fun setValueToDb(value: String, child: String, crossinline function: () -
     REF_DATABASE_ROOT.child(NODE_USERS).child(CURRENT_UID).child(child)
         .setValue(value)
         .addOnCompleteListener { function() }
+}
+
+fun initContacts() {
+    if(checkPermissions(READ_CONTACTS)) {
+        val arrayContacts = arrayListOf<CommonModel>()
+        val cursor = APP_ACTIVITY.contentResolver.query(
+            ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
+            null,
+            null,
+            null,
+            null,
+        )
+        cursor?.let {
+            while(it.moveToNext()) {
+                val fullName = it.getString(it.getColumnIndexOrThrow(ContactsContract.Contacts.DISPLAY_NAME))
+                val phone = it.getString(it.getColumnIndexOrThrow(ContactsContract.CommonDataKinds.Phone.NUMBER))
+                val newModel = CommonModel()
+                newModel.fullname = fullName
+                newModel.phone = phone.replace(Regex("[\\s, -]"), "")
+                arrayContacts.add(newModel)
+            }
+        }
+
+        Log.d("myLog", "${arrayContacts[0]} ${arrayContacts[1]}")
+        cursor?.close()
+        updatesPhonesToDatabase(arrayContacts)
+    }
+}
+
+fun updatesPhonesToDatabase(arrayContacts: ArrayList<CommonModel>) {
+    REF_DATABASE_ROOT.child(NODE_PHONES).addListenerForSingleValueEvent(AppValueEventListener {
+        it.children.forEach { snapshot ->
+            arrayContacts.forEach { contact ->
+                if (snapshot.key == contact.phone) {
+                    REF_DATABASE_ROOT.child(NODE_PHONES_CONTACTS).child(CURRENT_UID)
+                        .child(snapshot.value.toString()).child(CHILD_ID)
+                        .setValue(snapshot.value.toString())
+                        .addOnFailureListener{ showToast(it.message.toString()) }
+                }
+            }
+        }
+    })
 }

@@ -19,11 +19,22 @@
 
     <TextView
         android:id="@+id/settings_full_name"
-        android:text="Shouto Tonoma"
+        tools:text="Shouto Tonoma"
         app:layout_constraintTop_toBottomOf="@id/settings_user_photo"
         app:layout_constraintStart_toStartOf="@id/settings_user_photo"
         app:layout_constraintEnd_toEndOf="@id/settings_user_photo"
         style="@style/settings_username" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/settings_status"
+        tools:text="в сети"
+        android:textColor="@color/grey"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@id/settings_full_name"
+        app:layout_constraintStart_toStartOf="@id/settings_user_photo"
+        app:layout_constraintEnd_toEndOf="@id/settings_user_photo"/>
 
     <TextView
         android:id="@+id/settings_scores"
@@ -35,9 +46,9 @@
         android:padding="5dp"
         android:paddingStart="10dp"
         android:paddingEnd="10dp"
-        app:layout_constraintTop_toBottomOf="@id/settings_full_name"
-        app:layout_constraintStart_toStartOf="@id/settings_full_name"
-        app:layout_constraintEnd_toEndOf="@id/settings_full_name"
+        app:layout_constraintTop_toBottomOf="@id/settings_status"
+        app:layout_constraintStart_toStartOf="@id/settings_status"
+        app:layout_constraintEnd_toEndOf="@id/settings_status"
         android:layout_marginTop="10dp"
         android:textSize="16sp"
         android:textStyle="bold"/>

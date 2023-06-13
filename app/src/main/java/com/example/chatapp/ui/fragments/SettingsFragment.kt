@@ -27,6 +27,7 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>(
     private fun initFields() {
         APP_ACTIVITY.mBinding.tvActionBar.text = "Settings"
         binding.settingsFullName.text = USER.fullname
+        binding.settingsStatus.text = USER.status
         binding.settingsUserPhoto.downloadAndSetImage(USER.photoUrl)
     }
 

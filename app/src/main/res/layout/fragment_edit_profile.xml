@@ -44,15 +44,6 @@
         style="@style/edit_profile_inputText"
         android:inputType="text" />
 
-    <EditText
-        android:id="@+id/epPhoneNumberInput"
-        style="@style/edit_profile_inputText"
-        android:hint="Phone Number"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/epFullnameInput"
-        android:inputType="phone" />
-
 
     <EditText
         android:id="@+id/epRegionInput"
@@ -60,7 +51,7 @@
         android:hint="Region"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/epPhoneNumberInput" />
+        app:layout_constraintTop_toBottomOf="@id/epFullnameInput" />
 
     <Button
         android:id="@+id/dataSaveBtn"
