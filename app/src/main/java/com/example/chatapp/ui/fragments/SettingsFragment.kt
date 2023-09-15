@@ -2,15 +2,15 @@ package com.example.chatapp.ui.fragments
 
 
 import android.view.View
-import com.example.chatapp.MainActivity
-import com.example.chatapp.activities.RegisterActivity
 import com.example.chatapp.databinding.FragmentSettingsBinding
+import com.example.chatapp.ui.fragments.base.BaseFragment
 import com.example.chatapp.utilits.APP_ACTIVITY
-import com.example.chatapp.utilits.AUTH
-import com.example.chatapp.utilits.USER
+import com.example.chatapp.database.AUTH
+import com.example.chatapp.utilits.AppStates
+import com.example.chatapp.database.USER
 import com.example.chatapp.utilits.downloadAndSetImage
-import com.example.chatapp.utilits.replaceActivity
-import com.example.chatapp.utilits.setCurrentFragment
+import com.example.chatapp.utilits.replaceFragment
+import com.example.chatapp.utilits.restartActivity
 
 
 class SettingsFragment : BaseFragment<FragmentSettingsBinding>(
@@ -33,11 +33,12 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>(
 
     private fun initFunc() {
         binding.settingsLogout.setOnClickListener {
+            AppStates.updateStates(AppStates.OFFLINE)
             AUTH.signOut()
-            (activity as MainActivity).replaceActivity(RegisterActivity())
+            restartActivity()
         }
         binding.settingsBtnEditProfile.setOnClickListener {
-            APP_ACTIVITY.setCurrentFragment(EditProfileFragment())
+            replaceFragment(EditProfileFragment())
             APP_ACTIVITY.mBinding.tvActionBar.text = "Edit profile"
             APP_ACTIVITY.mBinding.backArrowLayout.visibility = View.VISIBLE
         }

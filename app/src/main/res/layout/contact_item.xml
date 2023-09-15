@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    style="@style/settings_btn"
     android:layout_margin="@dimen/horizontal_margin"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
@@ -18,14 +19,14 @@
     <TextView
         android:id="@+id/contact_fullname"
         style="@style/normalText"
-        android:text="Shouto Tonoma"
+        tools:text="Shouto Tonoma"
         app:layout_constraintStart_toEndOf="@id/contact_photo"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/contact_status"
         style="@style/smallText"
-        android:text="в сети"
+        tools:text="в сети"
         app:layout_constraintTop_toBottomOf="@id/contact_fullname"
         app:layout_constraintStart_toEndOf="@id/contact_photo"/>
 

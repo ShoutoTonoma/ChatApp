@@ -1,32 +1,32 @@
-package com.example.chatapp.ui.fragments
+package com.example.chatapp.ui.fragments.register
 
 import com.example.chatapp.R
-import com.example.chatapp.activities.RegisterActivity
 import com.example.chatapp.databinding.FragmentRegisterBinding
-import com.example.chatapp.utilits.AUTH
-import com.example.chatapp.utilits.CHILD_EMAIL
-import com.example.chatapp.utilits.CHILD_FULLNAME
-import com.example.chatapp.utilits.CHILD_ID
-import com.example.chatapp.utilits.CHILD_PHONE
-import com.example.chatapp.utilits.CURRENT_UID
-import com.example.chatapp.utilits.NODE_PHONES
-import com.example.chatapp.utilits.NODE_USERS
-import com.example.chatapp.utilits.REF_DATABASE_ROOT
+import com.example.chatapp.ui.fragments.base.BaseRegisterFragment
+import com.example.chatapp.utilits.APP_ACTIVITY
+import com.example.chatapp.database.AUTH
+import com.example.chatapp.database.CHILD_EMAIL
+import com.example.chatapp.database.CHILD_FULLNAME
+import com.example.chatapp.database.CHILD_ID
+import com.example.chatapp.database.CHILD_PHONE
+import com.example.chatapp.database.NODE_PHONES
+import com.example.chatapp.database.NODE_USERS
+import com.example.chatapp.database.REF_DATABASE_ROOT
 import com.example.chatapp.utilits.checkEmptyText
 import com.example.chatapp.utilits.replaceFragment
 import com.example.chatapp.utilits.showToast
 
 
-class RegisterFragment : BaseFragment<FragmentRegisterBinding>(
+class RegisterFragment : BaseRegisterFragment<FragmentRegisterBinding>(
     FragmentRegisterBinding::inflate
 ) {
 
     override fun onStart() {
         super.onStart()
-        (activity as RegisterActivity).mBinding.tvLogin.text =
+        APP_ACTIVITY.mBinding.tvActionBar.text =
             getString(R.string.toolbar_registration)
         binding.signInLink.setOnClickListener {
-            replaceFragment(LoginFragment(), false)
+            replaceFragment(LoginFragment())
         }
         userRegister()
     }
@@ -74,7 +74,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(
                                         .updateChildren(dateMap)
                                         .addOnSuccessListener {
                                             AUTH.signOut()
-                                            replaceFragment(LoginFragment(), false)
+                                            replaceFragment(LoginFragment())
                                             showToast("You were registered successfully")
                                         }
                                 }

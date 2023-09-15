@@ -8,5 +8,17 @@ data class CommonModel(
     var region:String = "",
     var status:String = "",
     var bio:String = "",
-    var photoUrl:String = "empty"
-)
+    var photoUrl:String = "empty",
+
+    var text: String = "",
+    var type: String = "",
+    var from: String = "",
+    var timeStamp: Any = "",
+    var imageUrl: String = "empty"
+
+
+) {
+    override fun equals(other: Any?): Boolean {
+        return (other as CommonModel).id == id
+    }
+}

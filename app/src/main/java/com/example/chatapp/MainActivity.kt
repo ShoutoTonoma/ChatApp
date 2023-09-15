@@ -5,24 +5,19 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.core.content.ContextCompat
-import com.example.chatapp.activities.RegisterActivity
 import com.example.chatapp.databinding.ActivityMainBinding
-import com.example.chatapp.ui.fragments.ChatsFragment
+import com.example.chatapp.ui.fragments.MainFragment
 import com.example.chatapp.ui.fragments.ContactsFragment
 import com.example.chatapp.ui.fragments.SettingsFragment
+import com.example.chatapp.ui.fragments.register.LoginFragment
 import com.example.chatapp.utilits.APP_ACTIVITY
-import com.example.chatapp.utilits.AUTH
+import com.example.chatapp.database.AUTH
 import com.example.chatapp.utilits.AppStates
-import com.example.chatapp.utilits.NODE_PHONES
 import com.example.chatapp.utilits.READ_CONTACTS
-import com.example.chatapp.utilits.REF_DATABASE_ROOT
-import com.example.chatapp.utilits.USER
-import com.example.chatapp.utilits.checkPermissions
 import com.example.chatapp.utilits.initContacts
-import com.example.chatapp.utilits.initFirebase
-import com.example.chatapp.utilits.initUser
-import com.example.chatapp.utilits.replaceActivity
-import com.example.chatapp.utilits.setCurrentFragment
+import com.example.chatapp.database.initFirebase
+import com.example.chatapp.database.initUser
+import com.example.chatapp.utilits.replaceFragment
 import com.example.chatapp.utilits.showToast
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -30,6 +25,7 @@ import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
     lateinit var mBinding: ActivityMainBinding
+    private var currentPageId = -1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,34 +44,40 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun initFields() {
-        setCurrentFragment(ChatsFragment())
+        APP_ACTIVITY.mBinding.bottomNav.visibility = View.VISIBLE
+        replaceFragment(MainFragment())
     }
 
 
     private fun initFunc() {
-        mBinding.bottomNav.setOnItemSelectedListener {
-            when(it.itemId) {
-                R.id.bottom_chats -> {
-                    mBinding.tvActionBar.text = "Messages"
-                    mBinding.imageBtnSearch.visibility = View.VISIBLE
-                    setCurrentFragment(ChatsFragment())
-                }
-                R.id.bottom_contact -> {
-                    mBinding.tvActionBar.text = "Contacts"
-                    mBinding.imageBtnSearch.visibility = View.VISIBLE
-                    setCurrentFragment(ContactsFragment())
-                }
-                R.id.bottom_settings -> {
-                    mBinding.tvActionBar.text = "Settings"
-                    mBinding.imageBtnSearch.visibility = View.GONE
-                    setCurrentFragment(SettingsFragment())
-                }
-            }
-            true
+        if(AUTH.currentUser != null) {
+            replaceFragment(MainFragment())
+        } else {
+            replaceFragment(LoginFragment())
         }
 
-        if(AUTH.currentUser == null) {
-            replaceActivity(RegisterActivity())
+        mBinding.bottomNav.setOnItemSelectedListener {
+            if (currentPageId == it.itemId) {
+                false
+            } else {
+                currentPageId = it.itemId
+                when(it.itemId) {
+                    R.id.bottom_chats -> {
+                        mBinding.tvActionBar.text = "Messages"
+                        replaceFragment(MainFragment())
+                    }
+                    R.id.bottom_contact -> {
+                        mBinding.tvActionBar.text = "Contacts"
+                        replaceFragment(ContactsFragment())
+                    }
+                    R.id.bottom_settings -> {
+                        mBinding.tvActionBar.text = "Settings"
+                        replaceFragment(SettingsFragment())
+                    }
+                }
+                true
+            }
+
         }
     }
 
