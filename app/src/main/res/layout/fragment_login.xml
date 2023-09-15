@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.fragments.LoginFragment">
+    tools:context=".ui.fragments.register.LoginFragment">
 
     <TextView
         android:id="@+id/tvWelcome"
@@ -13,7 +13,7 @@
         android:text="@string/login_welcome_text"
         android:textColor="@color/colorPrimary"
         android:textSize="@dimen/large_text"
-        app:layout_constraintBottom_toTopOf="@+id/emailInput"
+        app:layout_constraintBottom_toTopOf="@+id/emailInputLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -21,29 +21,48 @@
         app:layout_constraintVertical_chainStyle="packed" />
 
 
-    <EditText
-        android:id="@+id/emailInput"
-        style="@style/editText"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/emailInputLayout"
         android:hint="@string/login_email_hint"
-        android:inputType="textEmailAddress"
-        app:layout_constraintBottom_toTopOf="@+id/passwordInput"
+        app:layout_constraintBottom_toTopOf="@+id/passwordInputLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvWelcome"
         app:layout_constraintVertical_bias="0.5"
-        android:autofillHints="emailAddress" />
+        style="@style/text_input_layout">
 
-    <EditText
-        android:id="@+id/passwordInput"
-        style="@style/editText"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/emailInput"
+            style="@style/text_input_edit_text"
+            android:inputType="textEmailAddress"
+            android:autofillHints="emailAddress"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/passwordInputLayout"
+        style="@style/text_input_layout"
         android:hint="@string/login_password_hint"
-        android:inputType="textPassword"
+        app:passwordToggleEnabled="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/emailInput"
+        app:layout_constraintTop_toBottomOf="@+id/emailInputLayout"
         app:layout_constraintVertical_bias="0.5"
-        android:autofillHints="password" />
+        android:autofillHints="password" >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/passwordInput"
+            android:inputType="textPassword"
+            style="@style/text_input_edit_text" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+
+
 
     <Button
         android:id="@+id/btnSignIn"
@@ -51,9 +70,9 @@
         android:layout_height="wrap_content"
         android:text="@string/login_sign_in_btn_text"
         android:layout_marginTop="@dimen/vertical_large_margin"
-        app:layout_constraintTop_toBottomOf="@id/passwordInput"
-        app:layout_constraintStart_toStartOf="@id/passwordInput"
-        app:layout_constraintEnd_toEndOf="@id/passwordInput"/>
+        app:layout_constraintTop_toBottomOf="@id/passwordInputLayout"
+        app:layout_constraintStart_toStartOf="@id/passwordInputLayout"
+        app:layout_constraintEnd_toEndOf="@id/passwordInputLayout"/>
 
     <TextView
         android:id="@+id/tvHaveAccount"

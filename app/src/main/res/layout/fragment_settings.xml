@@ -6,6 +6,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.fragments.SettingsFragment">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:fillViewport="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/settings_user_photo"
         android:layout_width="80dp"
@@ -53,171 +65,176 @@
         android:textSize="16sp"
         android:textStyle="bold"/>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/settings_btn_edit_profile"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/settings_scores"
-        android:layout_marginTop="30dp"
-        style="@style/settings_btn">
-
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/settings_edit_profile_icon"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:src="@drawable/ic_edit_profile"
-            app:civ_circle_background_color="@color/colorPrimary"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/settings_edit_profile_text"
-            style="@style/large_text"
-            android:text="Edit Profile"
-            app:layout_constraintBottom_toBottomOf="@id/settings_edit_profile_icon"
-            app:layout_constraintStart_toEndOf="@id/settings_edit_profile_icon"
-            app:layout_constraintTop_toTopOf="@id/settings_edit_profile_icon" />
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/settings_btn_edit_profile"
+                android:layout_marginTop="30dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/settings_scores"
+                style="@style/settings_btn">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/settings_btn_change_password"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/settings_btn_edit_profile"
-        style="@style/settings_btn">
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/settings_edit_profile_icon"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/ic_edit"
+                    app:civ_border_color="@color/colorPrimary"
+                    app:civ_border_width="3dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/settings_change_password_icon"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:src="@drawable/ic_password"
-            app:civ_circle_background_color="@color/colorPrimary"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
-
-        <TextView
-            android:id="@+id/settings_change_password_text"
-            android:text="Change Password"
-            app:layout_constraintBottom_toBottomOf="@id/settings_change_password_icon"
-            app:layout_constraintStart_toEndOf="@id/settings_change_password_icon"
-            app:layout_constraintTop_toTopOf="@id/settings_change_password_icon"
-            style="@style/large_text" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/settings_btn_change_theme"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/settings_btn_change_password"
-        style="@style/settings_btn">
-
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/settings_change_theme_icon"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:src="@drawable/ic_theme"
-            app:civ_circle_background_color="@color/colorPrimary"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
-
-        <TextView
-            android:id="@+id/settings_change_theme_text"
-            android:text="Theme"
-            app:layout_constraintBottom_toBottomOf="@id/settings_change_theme_icon"
-            app:layout_constraintStart_toEndOf="@id/settings_change_theme_icon"
-            app:layout_constraintTop_toTopOf="@id/settings_change_theme_icon"
-            style="@style/large_text" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/settings_btn_change_language"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/settings_btn_change_theme"
-        style="@style/settings_btn">
-
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/settings_change_language_icon"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:src="@drawable/ic_language"
-            app:civ_circle_background_color="@color/colorPrimary"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
-
-        <TextView
-            android:id="@+id/settings_change_language_text"
-            android:text="Language"
-            app:layout_constraintBottom_toBottomOf="@id/settings_change_language_icon"
-            app:layout_constraintStart_toEndOf="@id/settings_change_language_icon"
-            app:layout_constraintTop_toTopOf="@id/settings_change_language_icon"
-            style="@style/large_text" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                <TextView
+                    android:id="@+id/settings_edit_profile_text"
+                    style="@style/large_text"
+                    android:text="Edit Profile"
+                    app:layout_constraintBottom_toBottomOf="@id/settings_edit_profile_icon"
+                    app:layout_constraintStart_toEndOf="@id/settings_edit_profile_icon"
+                    app:layout_constraintTop_toTopOf="@id/settings_edit_profile_icon" />
 
 
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/settings_btn_info"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/settings_btn_change_language"
-        style="@style/settings_btn">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/settings_btn_change_password"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/settings_btn_edit_profile"
+                style="@style/settings_btn">
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/settings_info_icon"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:src="@drawable/ic_info"
-            app:civ_circle_background_color="@color/colorPrimary"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/settings_change_password_icon"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/ic_password"
+                    app:civ_border_color="@color/colorPrimary"
+                    app:civ_border_width="3dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
 
-        <TextView
-            android:id="@+id/settings_info_text"
-            android:text="Information"
-            app:layout_constraintBottom_toBottomOf="@id/settings_info_icon"
-            app:layout_constraintStart_toEndOf="@id/settings_info_icon"
-            app:layout_constraintTop_toTopOf="@id/settings_info_icon"
-            style="@style/large_text" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                <TextView
+                    android:id="@+id/settings_change_password_text"
+                    android:text="Change Password"
+                    app:layout_constraintBottom_toBottomOf="@id/settings_change_password_icon"
+                    app:layout_constraintStart_toEndOf="@id/settings_change_password_icon"
+                    app:layout_constraintTop_toTopOf="@id/settings_change_password_icon"
+                    style="@style/large_text" />
 
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/settings_logout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/settings_btn_info"
-        android:layout_marginTop="60dp"
-        style="@style/settings_btn">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/settings_btn_change_theme"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/settings_btn_change_password"
+                style="@style/settings_btn">
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/settings_logout_icon"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:src="@drawable/ic_logout"
-            app:civ_circle_background_color="@color/colorPrimary"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/settings_change_theme_icon"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/ic_theme"
+                    app:civ_border_color="@color/colorPrimary"
+                    app:civ_border_width="3dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
 
-        <TextView
-            android:id="@+id/settings_logout_text"
-            style="@style/large_text"
-            android:text="Log out"
-            app:layout_constraintBottom_toBottomOf="@id/settings_logout_icon"
-            app:layout_constraintStart_toEndOf="@id/settings_logout_icon"
-            app:layout_constraintTop_toTopOf="@id/settings_logout_icon" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                <TextView
+                    android:id="@+id/settings_change_theme_text"
+                    android:text="Theme"
+                    app:layout_constraintBottom_toBottomOf="@id/settings_change_theme_icon"
+                    app:layout_constraintStart_toEndOf="@id/settings_change_theme_icon"
+                    app:layout_constraintTop_toTopOf="@id/settings_change_theme_icon"
+                    style="@style/large_text" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/settings_btn_change_language"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/settings_btn_change_theme"
+                style="@style/settings_btn">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/settings_change_language_icon"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/ic_language"
+                    app:civ_border_color="@color/colorPrimary"
+                    app:civ_border_width="3dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <TextView
+                    android:id="@+id/settings_change_language_text"
+                    android:text="Language"
+                    app:layout_constraintBottom_toBottomOf="@id/settings_change_language_icon"
+                    app:layout_constraintStart_toEndOf="@id/settings_change_language_icon"
+                    app:layout_constraintTop_toTopOf="@id/settings_change_language_icon"
+                    style="@style/large_text" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/settings_btn_info"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/settings_btn_change_language"
+                style="@style/settings_btn">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/settings_info_icon"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/ic_info"
+                    app:civ_border_color="@color/colorPrimary"
+                    app:civ_border_width="3dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <TextView
+                    android:id="@+id/settings_info_text"
+                    android:text="Information"
+                    app:layout_constraintBottom_toBottomOf="@id/settings_info_icon"
+                    app:layout_constraintStart_toEndOf="@id/settings_info_icon"
+                    app:layout_constraintTop_toTopOf="@id/settings_info_icon"
+                    style="@style/large_text" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
 
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/settings_logout"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/settings_btn_info"
+                android:layout_marginTop="60dp"
+                style="@style/settings_btn">
 
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/settings_logout_icon"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/ic_logout"
+                    app:civ_border_color="@color/colorPrimary"
+                    app:civ_border_width="3dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
+                <TextView
+                    android:id="@+id/settings_logout_text"
+                    style="@style/large_text"
+                    android:text="Log out"
+                    app:layout_constraintBottom_toBottomOf="@id/settings_logout_icon"
+                    app:layout_constraintStart_toEndOf="@id/settings_logout_icon"
+                    app:layout_constraintTop_toTopOf="@id/settings_logout_icon" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

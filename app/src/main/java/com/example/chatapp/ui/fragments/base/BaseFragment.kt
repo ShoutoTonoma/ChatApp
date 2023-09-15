@@ -1,4 +1,4 @@
-package com.example.chatapp.ui.fragments
+package com.example.chatapp.ui.fragments.base
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
 
 typealias Inflate<T> = (LayoutInflater, ViewGroup?, Boolean) -> T
-
 
 abstract class BaseFragment<VB: ViewBinding>(
     private val inflate: Inflate<VB>
@@ -26,9 +25,6 @@ abstract class BaseFragment<VB: ViewBinding>(
         return binding.root
     }
 
-    override fun onStart() {
-        super.onStart()
-    }
 
     override fun onDestroy() {
         super.onDestroy()

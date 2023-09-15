@@ -1,25 +1,25 @@
-package com.example.chatapp.ui.fragments
+package com.example.chatapp.ui.fragments.register
 
-import com.example.chatapp.MainActivity
 import com.example.chatapp.R
-import com.example.chatapp.activities.RegisterActivity
 import com.example.chatapp.databinding.FragmentLoginBinding
-import com.example.chatapp.utilits.AUTH
+import com.example.chatapp.ui.fragments.base.BaseRegisterFragment
+import com.example.chatapp.utilits.APP_ACTIVITY
+import com.example.chatapp.database.AUTH
 import com.example.chatapp.utilits.checkEmptyText
-import com.example.chatapp.utilits.replaceActivity
 import com.example.chatapp.utilits.replaceFragment
+import com.example.chatapp.utilits.restartActivity
 import com.example.chatapp.utilits.showToast
 
 
-class LoginFragment : BaseFragment<FragmentLoginBinding>(
+class LoginFragment : BaseRegisterFragment<FragmentLoginBinding>(
     FragmentLoginBinding::inflate
 ) {
 
     override fun onStart() {
         super.onStart()
-        (activity as RegisterActivity).mBinding.tvLogin.text = getString(R.string.toolbar_login)
+        APP_ACTIVITY.mBinding.tvActionBar.text = getString(R.string.toolbar_login)
         binding.signUpLink.setOnClickListener {
-            replaceFragment(RegisterFragment(), false)
+            replaceFragment(RegisterFragment())
         }
         userLogin()
     }
@@ -40,7 +40,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(
                 AUTH.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener { task ->
                         if(task.isSuccessful) {
-                            (activity as RegisterActivity).replaceActivity(MainActivity())
+                            restartActivity()
                             showToast("You are logged in successfully")
                         } else {
                             showToast(task.exception!!.message.toString())
